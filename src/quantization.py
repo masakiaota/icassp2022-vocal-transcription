@@ -23,7 +23,7 @@ def calc_tempo(path_audio):
     """
     target_sr = 22050
     y, _ = read_audio(path_audio, sr=target_sr)
-    onset_strength = librosa.onset.onset_strength(y, sr=target_sr)
+    onset_strength = librosa.onset.onset_strength(y=y, sr=target_sr)
     tempo = librosa.beat.tempo(onset_envelope=onset_strength, sr=target_sr)
     return tempo
 
@@ -39,7 +39,7 @@ def one_beat_frame_size(tempo):
         tempo: int
     
     """
-    return np.int(np.round(60 / tempo * 100))
+    return np.int64(np.round(60 / tempo * 100))
 
 
 def median_filter_pitch(pitch, medfilt_size, weight):
@@ -56,7 +56,7 @@ def median_filter_pitch(pitch, medfilt_size, weight):
     
     """
 
-    medfilt_size = np.int(medfilt_size * weight)
+    medfilt_size = np.int64(medfilt_size * weight)
     if medfilt_size % 2 == 0:
         medfilt_size += 1
     return np.round(medfilt(pitch, medfilt_size))

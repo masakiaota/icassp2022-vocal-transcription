@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "icassp2022-vocal-transcription"
+version = "0.1.0"
+description = "Code for ICASSP2022 paper \"Pseudo-Label Transfer from Frame-Level to Note-Level in a Teacher-Student Framework for Singing Transcription from Polyphonic Music\""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "icassp2022_vocal_transcription"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10, <3.11"
+librosa = "^0.10.1"
+mir-eval = "^0.7"
+pretty-midi = "^0.2.10"
+pydub = "^0.25.1"
+tensorflow-gpu = "==2.11.*"
+matplotlib = "^3.7.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+

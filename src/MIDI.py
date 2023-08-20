@@ -83,7 +83,7 @@ def segment_to_midi(segments, path_output, tempo=120):
     inst = pretty_midi.Instrument(program=inst_program)
     for segment in segments:
         note = pretty_midi.Note(
-            velocity=100, start=segment[0], end=segment[1], pitch=np.int(segment[2])
+            velocity=100, start=segment[0], end=segment[1], pitch=np.int64(segment[2])
         )
         inst.notes.append(note)
     pm.instruments.append(inst)
@@ -106,13 +106,13 @@ def note_to_segment(note):
 
     if note[0] > 0:
         startSeg.append(0)
-        notes.append(np.int(note[0]))
+        notes.append(np.int64(note[0]))
         flag *= -1
     for i in range(0, len(note) - 1):
         if note[i] != note[i + 1]:
             if flag < 0:
                 startSeg.append(0.01 * (i + 1))
-                notes.append(np.int(note[i + 1]))
+                notes.append(np.int64(note[i + 1]))
                 flag *= -1
             else:
                 if note[i + 1] == 0:
@@ -121,7 +121,7 @@ def note_to_segment(note):
                 else:
                     endSeg.append(0.01 * i)
                     startSeg.append(0.01 * (i + 1))
-                    notes.append(np.int(note[i + 1]))
+                    notes.append(np.int64(note[i + 1]))
 
     return list(zip(startSeg, endSeg, notes))
 
